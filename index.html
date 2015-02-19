@@ -1,0 +1,101 @@
+<!doctype html>
+<head>
+  <meta charset="utf-8">
+  <title>Simon</title>
+  <script src="angular.js"></script>
+  <script src="app.js"></script>
+
+  <style>
+    .green {
+      width: 0;
+      height: 0;
+      border-left: 80px solid transparent;
+      border-right: 80px solid transparent;
+      border-bottom: 80px solid #84FFBC;
+    }
+    .purple {
+      margin-top: 5px;
+      width: 0;
+      height: 0;
+      border-left: 80px solid transparent;
+      border-right: 80px solid transparent;
+      border-top: 80px solid #2B1A29;
+    }
+    .orange {
+      margin-top: -80px;
+      margin-left: 165px;
+      width: 0;
+      height: 0;
+      border-left: 80px solid transparent;
+      border-right: 80px solid transparent;
+      border-top: 80px solid #F2A663;
+    }
+    .red {
+      margin-top: -165px;
+      margin-left: 165px;
+      width: 0;
+      height: 0;
+      border-left: 80px solid transparent;
+      border-right: 80px solid transparent;
+      border-bottom: 80px solid #591202;
+    }
+    .colors_text {
+      font-family: 'copperplate';
+      float: right;
+      margin-right: 30%;
+      margin-top: -55px;
+    }
+    .start {
+      margin-top: 150px;
+      margin-left: 135px;
+      text-align: center;
+      font-family: 'copperplate';
+      width: 50px;
+      height: 20px;
+      border: 3px solid;
+    }
+    #turn {
+      font-family: 'copperplate';
+      margin-left: 110px;
+      margin-top: 15px;
+      color: #591202;
+    }
+    #game_over {
+      font-family: 'copperplate';
+      margin-left: 50px;
+      margin-top: 15px;
+    }
+
+  </style>
+</head>
+
+<body ng-app="myApp">
+  <div ng-controller="MyCtrl1 as ctrl">
+    <div ng-click="ctrl.logUserColor('green')" ng-mousedown="ctrl.greenMousedown()" ng-mouseup="ctrl.greenTriangleStyle={'border-bottom':'80px solid #84FFBC'}" ng-style="ctrl.greenTriangleStyle" class="green"></div>
+
+    <div ng-click="ctrl.logUserColor('purple')" ng-mousedown="ctrl.purpleMousedown()" ng-mouseup="ctrl.purpleTriangleStyle={'border-top':'80px solid #2B1A29'}" ng-style="ctrl.purpleTriangleStyle" class="purple"></div>
+
+    <div ng-click="ctrl.logUserColor('orange')" ng-mousedown="ctrl.orangeMousedown()" ng-mouseup="ctrl.orangeTriangleStyle={'border-top':'80px solid #F2A663'}" ng-style="ctrl.orangeTriangleStyle" class="orange"></div>
+
+    <div ng-click="ctrl.logUserColor('red')" ng-mousedown="ctrl.redMousedown()" ng-mouseup="ctrl.redTriangleStyle={'border-bottom':'80px solid #591202'}" ng-style="ctrl.redTriangleStyle" class="red"></div>
+
+    <div class="colors_text">
+      <h1> Colors </h1>
+      <div ng-hide="ctrl.turn!='Your'" ng-repeat="color in ctrl.userColors track by $index">
+        {{color}}
+      </div>
+      <div ng-hide="ctrl.turn=='Your'" ng-repeat="color in ctrl.computerColors track by $index">
+        {{color}}
+      </div>
+    </div>
+
+    <div class="start" ng-click="ctrl.startGame()">Start</div>
+
+    <div ng-show="ctrl.turn" id="turn"> {{ctrl.turn}} turn </div>
+
+    <div id="game_over" ng-show="ctrl.gameOver">
+      Game over! Click Start to play again!
+    </div>
+  </div>
+</body>
+</html>
